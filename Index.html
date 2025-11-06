@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WhereToGo Holidays — Travel & Tours</title>
+  <meta name="description" content="WhereToGo Holidays - curated travel packages, private tours, and corporate travel solutions." />
+  <style>
+    :root{--accent:#0077cc;--dark:#0f1724;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;color:#0b1220;background:#fff}
+    header{background:linear-gradient(90deg,rgba(0,119,204,0.06),rgba(0,119,204,0.02));border-bottom:1px solid #eef2f7}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;color:var(--dark)}
+    .brand .logo{width:48px;height:48px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+    .navlinks{display:flex;gap:16px;align-items:center}
+    .navlinks a{color:var(--muted);text-decoration:none;font-weight:600}
+    .cta{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:700}
+
+    .hero{display:grid;grid-template-columns:1fr;gap:20px;align-items:center;padding:48px 0}
+    .hero .eyebrow{color:var(--accent);font-weight:700}
+    .hero h1{font-size:32px;margin:8px 0 12px}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .search{display:flex;gap:8px}
+    .search input, .search select{padding:12px;border-radius:8px;border:1px solid #e6eef7;flex:1}
+    .search button{padding:12px 18px;background:var(--accent);color:#fff;border:none;border-radius:8px}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
+    .card{border:1px solid #eef2f7;border-radius:12px;padding:14px;background:#fff}
+    .card h3{margin:8px 0}
+    .price{font-weight:800;color:var(--accent)}
+
+    .packages{padding:32px 0}
+    .package-card{border-radius:12px;overflow:hidden;border:1px solid #eef2f7}
+    .package-card img{width:100%;height:160px;object-fit:cover}
+    .package-card .body{padding:14px}
+
+    footer{background:#f8fafc;padding:28px 0;margin-top:28px;border-top:1px solid #eef2f7}
+
+    /* Responsive */
+    @media(min-width:900px){
+      .hero{grid-template-columns:1fr 420px}
+      .hero h1{font-size:40px}
+    }
+
+    /* small niceties */
+    .badges{display:flex;gap:8px;flex-wrap:wrap}
+    .badge{padding:6px 10px;border-radius:999px;border:1px solid #e6eef7;font-weight:700}
+    .contact-form{display:grid;gap:8px}
+    .input{padding:10px;border-radius:8px;border:1px solid #e6eef7}
+    .muted{color:var(--muted)}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <div class="logo">NT</div>
+          <div>
+            <div>WhereToGo Holidays</div>
+            <small class="muted">Travel & Tours</small>
+          </div>
+        </div>
+        <div class="navlinks">
+          <a href="#packages">Packages</a>
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+          <a href="#contact" class="cta">Get a Quote</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Curated experiences • Local guides</div>
+        <h1>Discover trips you'll never forget — crafted for curious travelers</h1>
+        <p>Private tours, group departures, corporate travel, and custom itineraries. Explore our best-sellers below or request a tailored plan.</p>
+
+        <div class="search" role="search">
+          <input type="text" id="q" placeholder="Where to? (e.g., Paris, Kerala, Tokyo)" />
+          <select id="duration"><option value="">Duration</option><option>3-5 days</option><option>6-10 days</option><option>10+ days</option></select>
+          <button onclick="doSearch()">Search</button>
+        </div>
+
+        <div class="badges" style="margin-top:14px">
+          <span class="badge">Best price guarantee</span>
+          <span class="badge">24/7 support</span>
+          <span class="badge">Custom itineraries</span>
+        </div>
+
+        <div class="grid" style="margin-top:16px">
+          <div class="card"><strong>Flight + Hotel</strong><div class="muted">Start from</div><div class="price">₹29,999</div></div>
+          <div class="card"><strong>Honeymoon</strong><div class="muted">Popular</div><div class="price">₹49,999</div></div>
+          <div class="card"><strong>Adventure</strong><div class="muted">Trekking & more</div><div class="price">₹19,999</div></div>
+        </div>
+      </div>
+
+      <aside style="padding:18px;border-radius:12px;border:1px solid #eef2f7;background:#fff;">
+        <h3>Request a Quote</h3>
+        <form id="quoteForm" class="contact-form" onsubmit="submitQuote(event)">
+          <input class="input" id="name" placeholder="Your name" required />
+          <input class="input" id="email" type="email" placeholder="Email" required />
+          <input class="input" id="phone" placeholder="Phone" />
+          <input class="input" id="dest" placeholder="Destination" />
+          <button class="cta" type="submit">Send Request</button>
+        </form>
+        <small class="muted">We typically reply within 1 business day.</small>
+      </aside>
+    </section>
+
+    <section id="packages" class="packages">
+      <h2>Top Packages</h2>
+      <div class="grid" style="margin-top:12px">
+        <article class="package-card">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Beach escape">
+          <div class="body">
+            <h3>Goa Beach Escape — 5 Days</h3>
+            <p class="muted">Beaches, seafood, and sunset cruises.</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div>
+                <div class="price">₹18,500</div>
+                <div class="muted">Per person</div>
+              </div>
+              <a class="cta" href="#contact" onclick="scrollToContact()">Book now</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="package-card">
+          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Hill station">
+          <div class="body">
+            <h3>Himachal Explorer — 7 Days</h3>
+            <p class="muted">Mountains, valleys, and local homestays.</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div>
+                <div class="price">₹32,900</div>
+                <div class="muted">Per person</div>
+              </div>
+              <a class="cta" href="#contact" onclick="scrollToContact()">Book now</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="package-card">
+          <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="City trip">
+          <div class="body">
+            <h3>City Lights — International 6 Days</h3>
+            <p class="muted">City tours, museums, and culinary experiences.</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <div>
+                <div class="price">₹69,999</div>
+                <div class="muted">From</div>
+              </div>
+              <a class="cta" href="#contact" onclick="scrollToContact()">Book now</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="services">
+      <h2>Services</h2>
+      <div class="grid" style="margin-top:12px">
+        <div class="card"><h3>Private Tours</h3><p class="muted">Local guides, flexible schedules.</p></div>
+        <div class="card"><h3>Group Departures</h3><p class="muted">Small groups, great prices.</p></div>
+        <div class="card"><h3>Corporate Travel</h3><p class="muted">Managed itineraries & invoicing.</p></div>
+        <div class="card"><h3>Visa & Insurance</h3><p class="muted">Assistance with documentation.</p></div>
+      </div>
+    </section>
+
+    <section id="about" style="padding:24px 0">
+      <h2>About WhereToGo Holidays</h2>
+      <p class="muted">WhereToGo Holidays is a boutique travel agency founded by seasoned travelers. We design meaningful trips with local partners, focusing on sustainability and authentic experiences.</p>
+    </section>
+
+    <section id="contact" style="padding:18px 0">
+      <h2>Contact Us</h2>
+      <div style="display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px">
+        <form id="contactForm" class="contact-form" onsubmit="submitContact(event)">
+          <input class="input" id="cname" placeholder="Full name" required />
+          <input class="input" id="cemail" type="email" placeholder="Email" required />
+          <input class="input" id="cphone" placeholder="Phone" />
+          <textarea class="input" id="cmessage" rows="5" placeholder="Tell us about your trip"></textarea>
+          <button class="cta" type="submit">Send Message</button>
+        </form>
+
+        <div style="border:1px solid #eef2f7;padding:14px;border-radius:12px;background:#fff">
+          <strong>Email</strong>
+          <div class="muted">hello@nomadtrails.example</div>
+          <strong style="margin-top:8px;display:block">Phone</strong>
+          <div class="muted">+91 98765 43210</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>
+        <div style="font-weight:800">WhereToGo Holidays</div>
+        <small class="muted">© "Your Company" — All rights reserved</small>
+      </div>
+      <div class="muted">Designed for travel businesses • Built with a focus on conversion</div>
+    </div>
+  </footer>
+
+  <script>
+    function doSearch(){
+      const q = document.getElementById('q').value || 'anywhere';
+      const d = document.getElementById('duration').value || 'any duration';
+      alert('Searching packages for: '+q+' ('+d+') — this is a demo.');
+    }
+
+    function submitQuote(e){
+      e.preventDefault();
+      const name=document.getElementById('name').value;
+      const email=document.getElementById('email').value;
+      alert('Thanks '+name+" — we'll contact you at " + email + ' (demo).');
+      document.getElementById('quoteForm').reset();
+    }
+
+    function submitContact(e){
+      e.preventDefault();
+      const name=document.getElementById('cname').value;
+      alert('Message sent. Thank you, ' + name + ' (demo).');
+      document.getElementById('contactForm').reset();
+    }
+
+    function scrollToContact(){
+      document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+    }
+  </script>
+
+</body>
+</html>
