@@ -13,11 +13,30 @@ function submitQuote(e){
   document.getElementById("quoteForm").reset();
 }
 
-function submitContact(e){
-  e.preventDefault();
-  alert("Message sent by " + document.getElementById("cname").value);
-  document.getElementById("contactForm").reset();
-}
+  function submitContact(event) {
+    event.preventDefault(); // stop normal form submit
+
+    // Get form values
+    const name = document.getElementById("cname").value;
+    const email = document.getElementById("cemail").value;
+    const phone = document.getElementById("cphone").value;
+    const message = document.getElementById("cmessage").value;
+
+    // WhatsApp number (with country code, no +)
+    const whatsappNumber = "919995522895"; // 🔴 replace with YOUR number
+
+    // Create WhatsApp message
+    const whatsappMessage = 
+      `Hello, I would like to enquire about a trip.%0A%0A` +
+      `Name: ${name}%0A` +
+      `Email: ${email}%0A` +
+      `Phone: ${phone}%0A%0A` +
+      `Message:%0A${message}`;
+
+    // Open WhatsApp
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+    window.open(whatsappURL, "_blank");
+  }
 
 function scrollToContact(){
   document.getElementById("contact").scrollIntoView({behavior:"smooth"});
@@ -112,6 +131,40 @@ serviceRow.addEventListener('scroll', () => {
   dots.forEach(dot => dot.classList.remove('active'));
   dots[index].classList.add('active');
 });
+const tripCards = document.querySelectorAll('.trip-card');
+
+const tripObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+}, { threshold: 0.2 });
+
+tripCards.forEach(card => tripObserver.observe(card));
+
+  new Swiper(".testimonialSwiper", {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 3
+      }
+    }
+  });
 
 
 
